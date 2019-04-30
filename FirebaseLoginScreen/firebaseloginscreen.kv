@@ -6,11 +6,18 @@
 #:import animate FirebaseLoginScreen.animator.animate
 
 <FirebaseLoginScreen>:
-    on_sign_up_error_msg:
-        create_account_screen.ids.error_message.text = self.sign_up_error_msg
+    on_sign_up_msg:
+        create_account_screen.ids.message.text = self.sign_up_msg
     on_email_exists:
         create_account_screen.ids.sign_in_button.disabled = False
         create_account_screen.ids.sign_in_button.opacity = 1
+
+    on_email_not_found:
+        sign_in_screen.ids.sign_in_button.disabled = False
+        sign_in_screen.ids.sign_in_button.opacity = 1
+    on_sign_in_msg:
+        sign_in_screen.ids.message.text = self.sign_in_msg
+
     ScreenManager:
         id: screen_manager
         WelcomeScreen:

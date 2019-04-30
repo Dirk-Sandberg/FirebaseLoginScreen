@@ -29,10 +29,12 @@
             on_release:
                 # Need to refer to the FirebaseLoginScreen
                 root.parent.parent.sign_up(email.text, password.text)
-                animate(error_message, opacity=0, duration=0.5)
+                animate(message, opacity=0, duration=0.5)
+                sign_in_button.opacity = 0
+                sign_in_button.disabled = True
 
         ThemedMessage:
-            id: error_message
+            id: message
             size_hint: .8 ,.1
             pos_hint: {"center_x": .5, "center_y": .1}
             opacity: 0
@@ -41,7 +43,7 @@
 
         ThemedButton:
             id: sign_in_button
-            text: "[u](Sign in)[/u]"
+            text: "[u]Sign in[/u]"
             size_hint: .2 ,.05
             pos_hint: {"right": .85, "center_y": .1}
             opacity: 0
