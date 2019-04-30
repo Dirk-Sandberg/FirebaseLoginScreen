@@ -1,0 +1,19 @@
+#:include FirebaseLoginScreen/welcomescreen.kv
+#:include FirebaseLoginScreen/themedwidgets.kv
+#:include FirebaseLoginScreen/signinscreen.kv
+#:include FirebaseLoginScreen/createaccountscreen.kv
+#:import FirebaseLoginScreen FirebaseLoginScreen.firebaseloginscreen.FirebaseLoginScreen
+#:import animate FirebaseLoginScreen.animator.animate
+
+<FirebaseLoginScreen>:
+    ScreenManager:
+        id: screen_manager
+        WelcomeScreen:
+            id: welcome_screen
+            name: "welcome_screen"
+        SignInScreen:
+            id: sign_in_screen
+            name: "sign_in_screen"
+        CreateAccountScreen:
+            id: create_account_screen
+            name: "create_account_screen"

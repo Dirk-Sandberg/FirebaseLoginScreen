@@ -1,0 +1,39 @@
+<SignInScreen>:
+    FloatLayout:
+        ThemedButton:
+            size_hint: .05, .05
+            pos_hint: {"top": 1, "right": self.size_hint_x}
+            text: "X"
+            on_release:
+                root.parent.current = root.parent.previous()
+
+        ThemedInput:
+            id: email
+            size_hint: .9 ,.1
+            pos_hint: {"center_x": .5, "top": .8}
+            hint_text: "Email"
+
+        ThemedInput:
+            id: password
+            size_hint: .9 ,.1
+            pos_hint: {"center_x": .5, "top": .65}
+            hint_text: "Password"
+            password: True
+
+        ThemedButton:
+            text: "[u]Reset Password[/u]"
+            size_hint: .4 ,.1
+            pos_hint: {"center_x": .25, "top": .5}
+            on_release:
+                # Need to refer to the FirebaseLoginScreen
+                root.parent.parent.reset_password(email.text)
+
+
+        ThemedButton:
+            text: "[u]Log In[/u]"
+            size_hint: .4 ,.1
+            pos_hint: {"center_x": .75, "top": .5}
+            on_release:
+                # Need to refer to the FirebaseLoginScreen
+                root.parent.parent.sign_in(email.text, password.text)
+

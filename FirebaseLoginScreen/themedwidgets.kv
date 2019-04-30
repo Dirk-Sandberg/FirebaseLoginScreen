@@ -1,0 +1,56 @@
+<ThemedButton@ButtonBehavior+Label>:
+    text: "AY"
+    markup: True
+    opacity: 1 if self.state == 'normal' else .8
+
+    bg_color: FirebaseLoginScreen.primary_color
+    color: FirebaseLoginScreen.secondary_color
+
+    canvas.before:
+        Color:
+            rgb: self.bg_color if self.bg_color else (0,0,0)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: 10,
+
+<ThemedInput@FloatLayout>:
+    text: ""
+    hint_text: ""
+    canvas.before:
+        Color:
+            rgb: FirebaseLoginScreen.primary_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    TextInput:
+        text: root.text
+        id: the_text_input
+        background_color: FirebaseLoginScreen.primary_color
+        background_image: ""
+        background_normal: ""
+        background_active: ""
+        multiline: False
+        bottom_color: FirebaseLoginScreen.tertiary_color#(0,0,0)
+        size_hint: 1, .7
+        pos_hint: {"top": .7, "right": 1}
+        color: FirebaseLoginScreen.secondary_color
+        canvas.before:
+            Color:
+                rgb: self.bottom_color if self.bottom_color else (0,0,0)
+            Rectangle:
+                size: (self.size[0], self.size[1]/15.)
+                pos: self.pos
+        on_focus:
+            self.bottom_color = FirebaseLoginScreen.secondary_color if self.focused else FirebaseLoginScreen.tertiary_color
+            animate(the_label, animated_center_y = .8 if (self.focused or root.text != "") else .5)
+        on_text:
+            root.text = self.text
+    Label:
+        id: the_label
+        text: "  " + root.hint_text
+        size_hint: None, None
+        size: self.texture_size
+        animated_center_y: .5
+        animated_x: .95
+        pos_hint: {"center_y": self.animated_center_y, "right": self.animated_x}

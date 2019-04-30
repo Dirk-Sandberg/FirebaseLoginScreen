@@ -1,0 +1,19 @@
+<WelcomeScreen>:
+    FloatLayout:
+        ThemedButton:
+            id: log_in_button
+            size_hint: .9, .2
+            pos_hint: {"top": .8, "center_x": .5}
+            text: "[u]Log In[/u]"
+            on_release:
+                root.parent.current = "sign_in_screen"
+
+        ThemedButton:
+            id: create_account_button
+            size_hint: .9, .2
+            pos_hint: {"top": .5, "center_x": .5}
+            text: "[u]Create Account[/u]"
+            on_release:
+                root.parent.current = "create_account_screen"
+
+

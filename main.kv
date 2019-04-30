@@ -1,0 +1,18 @@
+#:include FirebaseLoginScreen/firebaseloginscreen.kv
+
+# -- This can be done in kv lang or python
+##:import FirebaseLoginScreen FirebaseLoginScreen.firebaseloginscreen.FirebaseLoginScreen
+
+FloatLayout:
+    canvas.before:
+        Color:
+            rgb: 1,0,1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    FirebaseLoginScreen:
+        size_hint: 1,1
+        pos_hint: {"top": 1, "right": 1}
+        on_login_success:
+            print("erik is a fucking LEGEND")
+
