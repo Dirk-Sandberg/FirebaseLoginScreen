@@ -14,6 +14,20 @@
             pos: self.pos
             radius: 10,
 
+<ThemedMessage@Label>:
+    bg_color: FirebaseLoginScreen.primary_color
+    color: (0,0,0,1)
+
+
+    canvas.before:
+        Color:
+            rgb: self.bg_color if self.bg_color else (0,0,0)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: 0,
+
+
 <ThemedInput@FloatLayout>:
     text: ""
     hint_text: ""

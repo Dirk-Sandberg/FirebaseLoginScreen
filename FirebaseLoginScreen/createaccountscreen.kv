@@ -5,16 +5,18 @@
             pos_hint: {"top": 1, "right": self.size_hint_x}
             text: "X"
             on_release:
-                root.parent.current = root.parent.previous()
+                root.parent.current = root.parent.current = "welcome_screen"
 
         ThemedInput:
             id: email
+            text: "test@gmail.com"
             size_hint: .9 ,.1
             pos_hint: {"center_x": .5, "top": .8}
             hint_text: "Email"
 
         ThemedInput:
             id: password
+            text: "123456"
             size_hint: .9 ,.1
             pos_hint: {"center_x": .5, "top": .65}
             hint_text: "Password"
@@ -27,4 +29,26 @@
             on_release:
                 # Need to refer to the FirebaseLoginScreen
                 root.parent.parent.sign_up(email.text, password.text)
+                animate(error_message, opacity=0, duration=0.5)
+
+        ThemedMessage:
+            id: error_message
+            size_hint: .8 ,.1
+            pos_hint: {"center_x": .5, "center_y": .1}
+            opacity: 0
+            on_text:
+                animate(self, opacity=.5, duration = 0.5)
+
+        ThemedButton:
+            id: sign_in_button
+            text: "[u](Sign in)[/u]"
+            size_hint: .2 ,.05
+            pos_hint: {"right": .85, "center_y": .1}
+            opacity: 0
+            disabled: True
+            on_release:
+                root.parent.current = "sign_in_screen"
+                root.parent.parent.ids.sign_in_screen.ids.email.text = email.text
+                root.parent.parent.ids.sign_in_screen.ids.password.text = password.text
+
 

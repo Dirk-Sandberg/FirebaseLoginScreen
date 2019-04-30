@@ -5,7 +5,7 @@
             pos_hint: {"top": 1, "right": self.size_hint_x}
             text: "X"
             on_release:
-                root.parent.current = root.parent.previous()
+                root.parent.current = root.parent.current = "welcome_screen"
 
         ThemedInput:
             id: email
