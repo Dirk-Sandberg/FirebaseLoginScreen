@@ -32,9 +32,9 @@ Code Example:<br>
     from FirebaseLoginScreen.firebaseloginscreen import FirebaseLoginScreen
     
     class MainApp(App):
-        login_primary_color: (1,0,0)   # Customize the
-        login_secondary_color: (0,1,0) # - color theme
-        login_tertiary_color: (0,0,1)  # -- of the login screens
+        login_primary_color = (1,0,0)   # Customize the
+        login_secondary_color = (0,1,0) # - color theme
+        login_tertiary_color = (0,0,1)  # -- of the login screens
         pass
         
     MainApp().run()
