@@ -81,6 +81,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         print(log_in_data)
 
     def sign_up_failure(self, urlrequest, failure_data):
+        self.email_exists = False  # Triggers hiding the sign in button
         msg = failure_data['error']['message'].replace("_", " ").capitalize()
         # Check if the error msg is the same as the last one
         if msg == self.sign_up_msg:
@@ -109,6 +110,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
                    on_error=self.sign_in_error)
 
     def sign_in_failure(self, urlrequest, failure_data):
+        self.email_not_found = False  # Triggers hiding the sign in button
         msg = failure_data['error']['message'].replace("_", " ").capitalize()
         # Check if the error msg is the same as the last one
         if msg == self.sign_in_msg:
