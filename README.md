@@ -4,6 +4,11 @@ Complete login screen with backend included for Kivy apps
 
 This package lets you very easily incorporate a login screen into your app.
 
+If a user has already signed in, it will store their login data and automatically
+sign them in the next time around. In this case, the login screens will not be
+shown, and your app will immediately do whatever you have coded it to do in
+the `on_login_success` function of the `FirebaseLoginScreen`.
+
 <h2><b>--------- USAGE ---------</b></h1>
 
 In your main.py file, include the following import statement:<br>
@@ -27,6 +32,9 @@ Code Example:<br>
     from FirebaseLoginScreen.firebaseloginscreen import FirebaseLoginScreen
     
     class MainApp(App):
+        login_primary_color: (1,0,0)   # Customize the
+        login_secondary_color: (0,1,0) # - color theme
+        login_tertiary_color: (0,0,1)  # -- of the login screens
         pass
         
     MainApp().run()
@@ -41,14 +49,11 @@ Code Example:<br>
         FirebaseLoginScreen:
             id: firebase_login_screen
             secret_api_key: "your_web_api_key_from_firebase" # Found in Firebase -> Project Settings -> Web API Key
-            primary_color: (1,0,0)   # Customize the
-            secondary_color: (0,1,0) # _ color theme
-            tertiary_color: (0,0,1)  # __ of the login screens
             on_login_success: # Meant to be overwritten
                 # Get the important user info
                 app.user_email = self.email
                 app.user_localId = self.localId
-                app.user_
+                app.user_idToken = self.idToken
                 app.do_whatever()  # Your function when they log in
 
 
