@@ -88,7 +88,6 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         self.idToken = log_in_data['idToken']
         self.save_refresh_token(self.refresh_token)
         self.login_success = True
-        print(log_in_data)
 
     def sign_up_failure(self, urlrequest, failure_data):
         self.email_exists = False  # Triggers hiding the sign in button
@@ -127,7 +126,6 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
             msg = " " + msg + " "
             # Need to modify it somehow to make the error popup display
         self.sign_in_msg = msg
-        print(msg)
         if msg == "Email not found":
             self.email_not_found = True
 

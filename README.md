@@ -31,13 +31,15 @@ Code Example:<br>
     
     from FirebaseLoginScreen.firebaseloginscreen import FirebaseLoginScreen
     
+    
     class MainApp(App):
-        login_primary_color = (1,0,0)   # Customize the
-        login_secondary_color = (0,1,0) # - color theme
-        login_tertiary_color = (0,0,1)  # -- of the login screens
-        pass
-        
+        login_primary_color = (1, 0, 0, 1)  # Login widget background colors
+        login_secondary_color = (0, 1, 0, 1)  # Login widget text color
+        login_tertiary_color = (0, 0, 1, 1)  # Text color when editing text fields
+    
+    
     MainApp().run()
+
 
 
 
@@ -48,13 +50,13 @@ Code Example:<br>
     ScreenManager:
         FirebaseLoginScreen:
             id: firebase_login_screen
-            secret_api_key: "your_web_api_key_from_firebase" # Found in Firebase -> Project Settings -> Web API Key
-            on_login_success: # Meant to be overwritten
+            web_api_key: "your_web_api_key_from_firebase" # Found in Firebase -> Project Settings -> Web API Key
+            on_login_success: 
+                # Defining this function lets you program what to do when the
+                # user has logged in (probably you'll want to change screens)!
                 # Get the important user info
-                app.user_email = self.email
                 app.user_localId = self.localId
                 app.user_idToken = self.idToken
-                app.do_whatever()  # Your function when they log in
 
 
 <h5><b>--------- NOTE: ENABLE EMAIL AUTHENTICATION ---------</b></h5>
