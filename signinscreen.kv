@@ -27,7 +27,8 @@
             on_release:
                 # Need to refer to the FirebaseLoginScreen
                 root.parent.parent.reset_password(email.text)
-                animate(message, opacity=0, duration=0.5)
+                #animate(message, opacity=0, duration=0.5)
+                Animation(opacity=0, duration=0.5).start(message)
                 sign_in_button.opacity = 0
                 sign_in_button.disabled = True
 
@@ -39,7 +40,8 @@
             on_release:
                 # Need to refer to the FirebaseLoginScreen
                 root.parent.parent.sign_in(email.text, password.text)
-                animate(message, opacity=0, duration=0.5)
+                #animate(message, opacity=0, duration=0.5)
+                Animation(opacity=0, duration=0.5).start(message)
                 sign_in_button.opacity = 0
                 sign_in_button.disabled = True
 
@@ -49,7 +51,8 @@
             pos_hint: {"center_x": .5, "center_y": .1}
             opacity: 0
             on_text:
-                animate(self, opacity=1, duration = 0.5)
+                #animate(self, opacity=1, duration = 0.5)
+                Animation(opacity=1, duration=0.5).start(self)
 
         ThemedButton:
             id: sign_in_button

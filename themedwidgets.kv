@@ -61,7 +61,8 @@
 
         on_focus:
             self.bottom_color = root.highlight_color2 if self.focused else root.highlight_color1
-            animate(the_label, animated_center_y = .8 if (self.focused or root.text != "") else .5)
+            #animate(the_label, animated_center_y = .8 if (self.focused or root.text != "") else .5)
+            Animation(animated_center_y=(0.8 if (self.focused or root.text != "") else 0.5)).start(the_label)
         on_text:
             root.text = self.text
     Label:

@@ -3,14 +3,24 @@ from kivy.properties import BooleanProperty, StringProperty
 from kivy.event import EventDispatcher
 from kivy.network.urlrequest import UrlRequest
 from kivy.app import App
+from kivy.lang import Builder
+
+# Python imports
+from json import dumps
+import os.path
+
+# Load the kv files
+folder = os.path.dirname(os.path.realpath(__file__))
+Builder.load_file(folder + "/themedwidgets.kv")
+Builder.load_file(folder + "/signinscreen.kv")
+Builder.load_file(folder + "/createaccountscreen.kv")
+Builder.load_file(folder + "/welcomescreen.kv")
+
 # Import the screens used to log the user in
 from welcomescreen import WelcomeScreen
 from signinscreen import SignInScreen
 from createaccountscreen import CreateAccountScreen
 
-# Python imports
-from json import dumps
-from os.path import exists
 
 
 class FirebaseLoginScreen(Screen, EventDispatcher):
@@ -53,7 +63,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         """
         # Try to load the users info if they've already created an account
         self.refresh_token_file = App.get_running_app().user_data_dir + "refresh_token.txt"
-        if exists(self.refresh_token_file):
+        if os.path.exists(self.refresh_token_file):
             self.load_saved_account()
 
     def sign_up(self, email, password):
