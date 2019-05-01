@@ -29,12 +29,13 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
     secondary_color = (0, .2, 1)
     tertiary_color = (1, 0, 0)
     login_success = BooleanProperty(False)
+    debug = False
 
     # Firebase Project meta info - MUST BE CONFIGURED BY DEVELOPER
     web_api_key = StringProperty()  # From Settings tab in Firebase project
 
     # Firebase Authentication Credentials - what developers want to retrieve
-    #email = ""
+    # email = ""
     refresh_token = ""
     localId = ""
     idToken = ""
@@ -45,11 +46,6 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
     email_exists = BooleanProperty(False)
     email_not_found = BooleanProperty(False)
 
-    def __init__(self, **kwargs):
-        super(FirebaseLoginScreen, self).__init__(**kwargs)
-
-
-
     def on_login_success(self, *args):
         """Overwrite this method to switch to your app's home screen.
         """
@@ -58,11 +54,11 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
     def on_web_api_key(self, *args):
         """When the web api key is set, look for an existing account in local
         memory.
-
-        :return:
         """
         # Try to load the users info if they've already created an account
         self.refresh_token_file = App.get_running_app().user_data_dir + "refresh_token.txt"
+        if self.debug:
+            print("Looking for a refresh token in:", self.refresh_token_file)
         if os.path.exists(self.refresh_token_file):
             self.load_saved_account()
 
@@ -71,6 +67,8 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         do whatever you need to do to sign the user up with their email and
         password.
         """
+        if self.debug:
+            print("Attempting to create a new account: ", email, password)
         signup_url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=" + self.web_api_key
         signup_payload = dumps(
             {"email": email, "password": password, "returnSecureToken": "true"})
@@ -88,27 +86,33 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         self.idToken = log_in_data['idToken']
         self.save_refresh_token(self.refresh_token)
         self.login_success = True
+        if self.debug:
+            print("Successfully logged in a user: ", log_in_data)
 
     def sign_up_failure(self, urlrequest, failure_data):
         self.email_exists = False  # Triggers hiding the sign in button
         msg = failure_data['error']['message'].replace("_", " ").capitalize()
         # Check if the error msg is the same as the last one
         if msg == self.sign_up_msg:
-            msg = " " + msg + " "
             # Need to modify it somehow to make the error popup display
+            msg = " " + msg + " "
         self.sign_up_msg = msg
         if msg == "Email exists":
             self.email_exists = True
+        if self.debug:
+            print("Couldn't sign the user up: ", failure_data)
 
     def sign_up_error(self, *args):
-        print("Sign up Error")
-        print(args)
+        if self.debug:
+            print("Sign up Error: ", args)
 
     def sign_in(self, email, password):
         """If you don't want to use Firebase, just overwrite this method and
         do whatever you need to do to sign the user in with their email and
         password.
         """
+        if self.debug:
+            print("Attempting to sign user in: ", email, password)
         sign_in_url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=" + self.web_api_key
         sign_in_payload = dumps(
             {"email": email, "password": password, "returnSecureToken": True})
@@ -123,20 +127,24 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         msg = failure_data['error']['message'].replace("_", " ").capitalize()
         # Check if the error msg is the same as the last one
         if msg == self.sign_in_msg:
-            msg = " " + msg + " "
             # Need to modify it somehow to make the error popup display
+            msg = " " + msg + " "
         self.sign_in_msg = msg
         if msg == "Email not found":
             self.email_not_found = True
+        if self.debug:
+            print("Couldn't sign the user in: ", failure_data)
 
     def sign_in_error(self, *args):
-        print("Sign in error")
-        print(args)
+        if self.debug:
+            print("Sign in error", args)
 
     def reset_password(self, email):
         """If you don't want to use Firebase, just overwrite this method and
         do whatever you need to do to reset a user's password from their email.
         """
+        if self.debug:
+            print("Attempting to send a password reset email to: ", email)
         reset_pw_url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/getOobConfirmationCode?key=" + self.web_api_key
         reset_pw_data = dumps({"email": email, "requestType": "PASSWORD_RESET"})
 
@@ -146,17 +154,25 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
                    on_error=self.sign_in_error)
 
     def successful_reset(self, urlrequest, reset_data):
+        if self.debug:
+            print("Successfully sent a password reset email", reset_data)
         self.sign_in_msg = "Reset password instructions sent to your email."
 
     def save_refresh_token(self, refresh_token):
+        if self.debug:
+            print("Saving the refresh token to file: ", self.refresh_token_file)
         with open(self.refresh_token_file, "w") as f:
             f.write(refresh_token)
 
     def load_refresh_token(self):
+        if self.debug:
+            print("Loading refresh token from file: ", self.refresh_token_file)
         with open(self.refresh_token_file, "r") as f:
             self.refresh_token = f.read()
 
     def load_saved_account(self):
+        if self.debug:
+            print("Attempting to log in a user automatically using a refresh token.")
         self.load_refresh_token()
         refresh_url = "https://securetoken.googleapis.com/v1/token?key=" + self.web_api_key
         refresh_payload = dumps({"grant_type": "refresh_token", "refresh_token": self.refresh_token})
@@ -166,12 +182,13 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
                    on_error=self.failed_account_load)
 
     def successful_account_load(self, urlrequest, loaded_data):
+        if self.debug:
+            print("Successfully logged a user in automatically using the refresh token")
         self.idToken = loaded_data['id_token']
         self.localId = loaded_data['user_id']
         self.login_success = True
 
     def failed_account_load(self, *args):
-        print("Failed to load an account")
-        print(args)
-
+        if self.debug:
+            print("Failed to load an account.", args)
 
