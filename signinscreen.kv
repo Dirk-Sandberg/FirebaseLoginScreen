@@ -1,9 +1,9 @@
 <SignInScreen>:
     FloatLayout:
         ThemedButton:
-            size_hint: .05, .05
-            pos_hint: {"top": 1-self.size_hint_y, "right": 2*self.size_hint_x}
-            text: "X"
+            size_hint: .4, .05
+            pos_hint: {"center_x": .75, "top": .375}
+            text: "[u]Back[/u]"
             bg_color: root.parent.parent.primary_color if root.parent else (0,0,0,1)
             color: root.parent.parent.secondary_color if root.parent else (0,0,0,1)
             on_release:
@@ -33,7 +33,7 @@
         ThemedButton:
             text: "[u]Reset Password[/u]"
             size_hint: .4 ,.05
-            pos_hint: {"center_x": .25, "top": .425}
+            pos_hint: {"center_x": .25, "top": .45}
             bg_color: root.parent.parent.primary_color if root.parent else (0,0,0,1)
             color: root.parent.parent.secondary_color if root.parent else (0,0,0,1)
             on_release:
@@ -48,7 +48,7 @@
         ThemedButton:
             text: "[u]Sign In[/u]"
             size_hint: .4 ,.05
-            pos_hint: {"center_x": .75, "top": .425}
+            pos_hint: {"center_x": .75, "top": .45}
             bg_color: root.parent.parent.primary_color if root.parent else (0,0,0,1)
             color: root.parent.parent.secondary_color if root.parent else (0,0,0,1)
             on_release:
