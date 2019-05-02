@@ -73,7 +73,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
     debug = False
     popup = Factory.LoadingPopup()
     popup.background = folder + "/transparent_image.png"
-    popup.color = App.get_running_app().login_tertiary_color
+
 
     def on_login_success(self, *args):
         """Overwrite this method to switch to your app's home screen.
@@ -257,6 +257,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
             print("Failed to load an account.", args)
 
     def display_loading_screen(self, *args):
+        self.popup.color = self.secondary_color
         self.popup.open()
 
     def hide_loading_screen(self, *args):

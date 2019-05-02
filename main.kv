@@ -1,6 +1,6 @@
 #:include firebaseloginscreen.kv
 #:import FirebaseLoginScreen firebaseloginscreen.FirebaseLoginScreen
-
+#:import utils kivy.utils
 FloatLayout:
     canvas.before:
         Color:
@@ -12,6 +12,10 @@ FloatLayout:
         size_hint: 1,1
         pos_hint: {"top": 1, "right": 1}
         web_api_key: "AIzaSyBm1agLPGayibuyd3az620cWtbyB_2hV88"
+        primary_color: utils.get_color_from_hex("#EE682A")
+        secondary_color: utils.get_color_from_hex("#060809")
+        tertiary_color: utils.get_color_from_hex("#434343")
+
         on_login_success:
             print("erik is a LEGEND")
 

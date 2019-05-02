@@ -2,6 +2,10 @@
 #:import SlideTransition kivy.uix.screenmanager.SlideTransition
 
 <FirebaseLoginScreen>:
+    primary_color: 1, 0, 0, 1
+    secondary_color: 1, 0, 0, 1
+    tertiary_color: 1, 0, 0, 1
+
     on_sign_up_msg:
         create_account_screen.ids.message.text = self.sign_up_msg
     on_email_exists:

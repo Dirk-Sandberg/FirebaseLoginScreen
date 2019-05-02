@@ -5,8 +5,9 @@
             size_hint: .9, .1
             pos_hint: {"top": .4, "center_x": .5}
             text: "[u]Sign In[/u]"
+            bg_color: root.parent.parent.primary_color if root.parent else (0,0,0,1)
+            color: root.parent.parent.secondary_color if root.parent else (0,0,0,1)
             on_release:
-                #root.parent.transition = SlideTransition()
                 root.parent.current = "sign_in_screen"
 
         ThemedButton:
@@ -14,6 +15,8 @@
             size_hint: .9, .1
             pos_hint: {"top": .25, "center_x": .5}
             text: "[u]Create Account[/u]"
+            bg_color: root.parent.parent.primary_color if root.parent else (0,0,0,1)
+            color: root.parent.parent.secondary_color if root.parent else (0,0,0,1)
             on_release:
                 root.parent.current = "create_account_screen"
 
