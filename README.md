@@ -1,47 +1,63 @@
 # FirebaseLoginScreen
-#### UNDER DEVELOPMENT - UNSTABLE ###
-Complete login screen with backend included for Kivy apps
+Complete login screen with backend included for Kivy apps using Firebase for
+user authentication.
 
-This package lets you very easily incorporate a login screen into your app.
+This package lets you essentially drop a functional login screen into your app
+within seconds.
 
-If a user has already signed in, it will store their login data and automatically
-sign them in the next time around. In this case, the login screens will not be
-shown, and your app will immediately do whatever you have coded it to do in
-the `on_login_success` function of the `FirebaseLoginScreen`.
+If a user has already signed in, it will store their login data and
+automatically sign them in the next time around. In this case, the login screens
+will not be shown, and your app will immediately do whatever you have coded it
+to do in the `on_login_success` function of the `FirebaseLoginScreen`.
 
 <h2><b>--------- USAGE ---------</b></h1>
 
-In your main.py file, include the following import statement:<br>
-`import FirebaseLoginScreen`
+`cd` to your project's directory. Clone this repository using <br>
+`git clone https://github.com/Dirk-Sandberg/FirebaseLoginScreen.git`
 
-Then, in the kv file where you want to use the login screen, include this statement:
-<br>`#:include FirebaseLoginScreen/firebaseloginscreen.kv`
+Which will create a folder named FirebaseLoginScreen in your project.
 
-Now you can instantiate the FirebaseLoginScreen class, which inherits from the
-Kivy Screen class. That means you need to add it to your ScreenManager.
+In your <b>main.py</b> file, include the following import statement:<br>
+`from FirebaseLoginScreen.firebaseloginscreen import FirebaseLoginScreen`
 
-Typically, when making requests to your database to get data for your user, you
-identify the user by their `localId`. You can use the `idToken` to authenticate
-a user's request to the database if you have set up Firebase <b>Rules</b>. Both
-of these variables are automatically retrieved for you by `FirebaseLoginScreen`.<br>
-Code Example:<br>
+in your main `App` class, you must include three variables defining the color 
+scheme of the login screen. The variables are shown in the (fully functioning)
+example below.
 `main.py`
 
     from kivy.app import App
     
     from FirebaseLoginScreen.firebaseloginscreen import FirebaseLoginScreen
     
-    
     class MainApp(App):
-        login_primary_color = (1, 0, 0, 1)  # Login widget background colors
-        login_secondary_color = (0, 1, 0, 1)  # Login widget text color
+        login_primary_color = (1, 0, 0, 1)   # Login widget background colors
+        login_secondary_color = (0, 1, 0, 1) # Login widget text color
         login_tertiary_color = (0, 0, 1, 1)  # Text color when editing text fields
-    
     
     MainApp().run()
 
 
+Then, in the kv file where you want to use the login screen, include this statement:
+<br>`#:include FirebaseLoginScreen/firebaseloginscreen.kv`
 
+You also need to set the <b>web api key</b> of your Firebase project. This
+can be found in your Firebase project by clicking on the settings wheel in the
+top left of the Firebase dashboard for your project. Then click 
+<b>Project Settings</b>.
+
+Now you can instantiate the FirebaseLoginScreen class, which inherits from the
+Kivy `Screen` class. That means you need to add it to your `ScreenManager`.
+
+You should define the `on_login_success` function to execute whatever code you
+want once a user has logged in. Probably you'll want to 1) Retrieve some data
+from Firebase and 2) switch to a different screen in your `ScreenManager`.
+
+Typically, when making requests to your database to get data for your user, you
+identify the user by their `localId`. You can use the `idToken` to authenticate
+a user's request to the database if you have set up Firebase <b>Rules</b>. Both
+of these variables are automatically retrieved for you by `FirebaseLoginScreen`.<br>
+A (fully functional) example of including the proper code in your KV file is
+shown in the example below:
 
 `main.kv`
     
