@@ -4,10 +4,11 @@ from kivy.event import EventDispatcher
 from kivy.network.urlrequest import UrlRequest
 from kivy.app import App
 from kivy.lang import Builder
-
+from kivy.factory import Factory
 # Python imports
 from json import dumps
 import os.path
+import progressspinner
 
 # Load the kv files
 folder = os.path.dirname(os.path.realpath(__file__))
@@ -15,6 +16,7 @@ Builder.load_file(folder + "/themedwidgets.kv")
 Builder.load_file(folder + "/signinscreen.kv")
 Builder.load_file(folder + "/createaccountscreen.kv")
 Builder.load_file(folder + "/welcomescreen.kv")
+Builder.load_file(folder + "/loadingpopup.kv")
 
 # Import the screens used to log the user in
 from welcomescreen import WelcomeScreen
@@ -69,6 +71,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
     email_not_found = BooleanProperty(False)
 
     debug = False
+    popup = Factory.LoadingPopup()
 
     def on_login_success(self, *args):
         """Overwrite this method to switch to your app's home screen.
@@ -105,6 +108,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
     def successful_login(self, urlrequest, log_in_data):
         """Collects info from Firebase upon successfully registering a new user.
         """
+        self.hide_loading_screen()
         self.refresh_token = log_in_data['refreshToken']
         self.localId = log_in_data['localId']
         self.idToken = log_in_data['idToken']
@@ -117,6 +121,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         """Displays an error message to the user if their attempt to log in was
         invalid.
         """
+        self.hide_loading_screen()
         self.email_exists = False  # Triggers hiding the sign in button
         msg = failure_data['error']['message'].replace("_", " ").capitalize()
         # Check if the error msg is the same as the last one
@@ -130,6 +135,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
             print("Couldn't sign the user up: ", failure_data)
 
     def sign_up_error(self, *args):
+        self.hide_loading_screen()
         if self.debug:
             print("Sign up Error: ", args)
 
@@ -154,6 +160,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         """Displays an error message to the user if their attempt to create an
         account was invalid.
         """
+        self.hide_loading_screen()
         self.email_not_found = False  # Triggers hiding the sign in button
         msg = failure_data['error']['message'].replace("_", " ").capitalize()
         # Check if the error msg is the same as the last one
@@ -167,6 +174,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
             print("Couldn't sign the user in: ", failure_data)
 
     def sign_in_error(self, *args):
+        self.hide_loading_screen()
         if self.debug:
             print("Sign in error", args)
 
@@ -191,6 +199,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
     def successful_reset(self, urlrequest, reset_data):
         """Notifies the user that a password reset email has been sent to them.
         """
+        self.hide_loading_screen()
         if self.debug:
             print("Successfully sent a password reset email", reset_data)
         self.sign_in_msg = "Reset password instructions sent to your email."
@@ -233,6 +242,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         """Sets the idToken and localId variables upon successfully loading an
         account using the refresh token.
         """
+        self.hide_loading_screen()
         if self.debug:
             print("Successfully logged a user in automatically using the refresh token")
         self.idToken = loaded_data['id_token']
@@ -240,6 +250,14 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         self.login_success = True
 
     def failed_account_load(self, *args):
+        self.hide_loading_screen()
         if self.debug:
             print("Failed to load an account.", args)
+
+    def display_loading_screen(self, *args):
+        self.popup.open()
+
+    def hide_loading_screen(self, *args):
+        self.popup.dismiss()
+
 
