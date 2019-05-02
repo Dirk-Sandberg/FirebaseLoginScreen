@@ -14,7 +14,7 @@
             radius: 10,
 
 <ThemedMessage@Label>:
-    bg_color: app.login_primary_color[:3] + [.7]
+    bg_color: app.login_primary_color[:3] + [.7] if type(app.login_primary_color) != tuple else app.login_primary_color[:3] + tuple([.7])
     color: app.login_secondary_color
     text_size: self.size
     padding: 15, 0
