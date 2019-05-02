@@ -100,4 +100,8 @@ You can customize the email that is sent to users when they want to reset their 
 Go to your Firebase project, then go to <b>Authentication</b>, then click on <b>Templates</b>,
 then click on <b>Password reset</b>
 
+This module makes use of the Progress Spinner widget from the
+<a href="https://github.com/kivy-garden/garden.progressspinner" target=_blank>
+kivy.garden.progressspinner</a> package. 
+
 

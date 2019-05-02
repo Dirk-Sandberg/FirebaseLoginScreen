@@ -31,6 +31,7 @@
                 Animation(opacity=0, duration=0.5).start(message)
                 sign_in_button.opacity = 0
                 sign_in_button.disabled = True
+                root.parent.parent.display_loading_screen()
 
 
         ThemedButton:
@@ -44,6 +45,7 @@
                 Animation(opacity=0, duration=0.5).start(message)
                 sign_in_button.opacity = 0
                 sign_in_button.disabled = True
+                root.parent.parent.display_loading_screen()
 
         ThemedMessage:
             id: message
