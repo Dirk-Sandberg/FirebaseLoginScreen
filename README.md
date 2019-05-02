@@ -90,11 +90,13 @@ Make sure the FirebaseLoginScreen is the first screen in your `ScreenManager`.
 That's it! Run your app and enjoy your login screen.
 
 <h5><b>--------- NOTE: ENABLE EMAIL AUTHENTICATION ---------</b></h5>
+-
 Your Firebase project must be allowed to register users through an email and
 password. You can set this up easily by going to the Authentication portion of your
 Firebase project.
 
 <h5><b>--------- NOTE: CUSTOMIZE RESET PASSWORD EMAIL ---------</b></h5>
+-
 You can customize the email that is sent to users when they want to reset their email.
 Go to your Firebase project, then go to <b>Authentication</b>, then click on <b>Templates</b>,
 then click on <b>Password reset</b>
@@ -102,5 +104,19 @@ then click on <b>Password reset</b>
 This module makes use of the Progress Spinner widget from the
 <a href="https://github.com/kivy-garden/garden.progressspinner" target=_blank>
 kivy.garden.progressspinner</a> package. 
+
+Suggestions
+-
+Add a background image to your login screen to make it much less plain. Do it by
+adding an image to the canvas of your `FirebaseLoginScreen` in the kv language.
+Example:
+
+    FirebaseLoginScreen:
+        canvas.before:
+            Rectangle:
+                size: self.size
+                pos: self.pos
+                source: "your/image/here.png"
+
 
 
