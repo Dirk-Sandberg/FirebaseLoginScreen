@@ -5,17 +5,27 @@ user authentication.
 This package lets you essentially drop a functional login screen into your app
 within seconds.
 
+#####Features:
+- Create account
+- Sign in to account
+- Reset password
+- Automatically signs users in upon app launch if an account has already been created.
+
 If a user has already signed in, it will store their login data and
 automatically sign them in the next time around. In this case, the login screens
 will not be shown, and your app will immediately do whatever you have coded it
 to do in the `on_login_success` function of the `FirebaseLoginScreen`.
 
-<h2><b>--------- USAGE ---------</b></h1>
+<h3><b>--------- USAGE ---------</b></h3>
+-
+<h5><b>Clone the project</b></h5>
 
 `cd` to your project's directory. Clone this repository using <br>
 `git clone https://github.com/Dirk-Sandberg/FirebaseLoginScreen.git`
 
 Which will create a folder named FirebaseLoginScreen in your project.
+
+<h5><b>Update main.py</b></h5>
 
 In your <b>main.py</b> file, include the following import statement:<br>
 `from FirebaseLoginScreen.firebaseloginscreen import FirebaseLoginScreen`
@@ -37,7 +47,9 @@ example below.
     MainApp().run()
 
 
-Then, in the kv file where you want to use the login screen, include this statement:
+<h5><b>Update main.kv</b></h5>
+
+In the kv file where you want to use the login screen, include this statement:
 <br>`#:include FirebaseLoginScreen/firebaseloginscreen.kv`
 
 You also need to set the <b>web api key</b> of your Firebase project. This
@@ -74,6 +86,9 @@ shown in the example below:
                 app.user_localId = self.localId
                 app.user_idToken = self.idToken
 
+Make sure the FirebaseLoginScreen is the first screen in your `ScreenManager`.
+
+That's it! Run your app and enjoy your login screen.
 
 <h5><b>--------- NOTE: ENABLE EMAIL AUTHENTICATION ---------</b></h5>
 Your Firebase project must be allowed to register users through an email and
