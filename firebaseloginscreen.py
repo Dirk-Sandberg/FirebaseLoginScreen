@@ -24,6 +24,27 @@ from createaccountscreen import CreateAccountScreen
 
 
 class FirebaseLoginScreen(Screen, EventDispatcher):
+    """Use this widget as a complete module to incorporate Firebase user
+    authentication in your app. To use this module, instantiate the login screen
+    in the KV language like so:
+    FirebaseLoginScreen:
+        web_api_key: "your_firebase_web_api_key"
+        primary_color: (1, 0, 0, 1)
+        secondary_color: (0, 1, 0, 1)
+        tertiary_color: (0, 0, 1, 1)
+        debug: True # Not necessary, but will print out debug information
+        on_login_success:
+            # do something here
+    NOTES:
+    1) You MUST set the web api key or it is impossible for the login screen to
+    function properly.
+    2) You probably want to wrap the FirebaseLoginScreen in a ScreenManager.
+    3) You probably want to switch screens to a Screen in your project once the
+    user has logged in (write that code in the on_login_success function shown
+    in the example above).
+    4) You can set the colors (primary_color, secondary_color, tertiary_color)
+    to be whatever you like.
+    """
     # Configurable UI attributes
     primary_color = (0, 1, 1)
     secondary_color = (0, .2, 1)
@@ -35,7 +56,6 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
     web_api_key = StringProperty()  # From Settings tab in Firebase project
 
     # Firebase Authentication Credentials - what developers want to retrieve
-    # email = ""
     refresh_token = ""
     localId = ""
     idToken = ""
@@ -90,6 +110,9 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
             print("Successfully logged in a user: ", log_in_data)
 
     def sign_up_failure(self, urlrequest, failure_data):
+        """Displays an error message to the user if their attempt to log in was
+        invalid.
+        """
         self.email_exists = False  # Triggers hiding the sign in button
         msg = failure_data['error']['message'].replace("_", " ").capitalize()
         # Check if the error msg is the same as the last one
@@ -107,9 +130,10 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
             print("Sign up Error: ", args)
 
     def sign_in(self, email, password):
-        """If you don't want to use Firebase, just overwrite this method and
-        do whatever you need to do to sign the user in with their email and
-        password.
+        """Called when the "Log in" button is pressed.
+
+        Sends the user's email and password in an HTTP request to the Firebase
+        Authentication service.
         """
         if self.debug:
             print("Attempting to sign user in: ", email, password)
@@ -123,6 +147,9 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
                    on_error=self.sign_in_error)
 
     def sign_in_failure(self, urlrequest, failure_data):
+        """Displays an error message to the user if their attempt to create an
+        account was invalid.
+        """
         self.email_not_found = False  # Triggers hiding the sign in button
         msg = failure_data['error']['message'].replace("_", " ").capitalize()
         # Check if the error msg is the same as the last one
@@ -140,8 +167,12 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
             print("Sign in error", args)
 
     def reset_password(self, email):
-        """If you don't want to use Firebase, just overwrite this method and
-        do whatever you need to do to reset a user's password from their email.
+        """Called when the "Reset password" button is pressed.
+
+        Sends an automated email on behalf of your Firebase project to the user
+        with a link to reset the password. This email can be customized to say
+        whatever you want. Simply change the content of the template by going to
+        Authentication (in your Firebase project) -> Templates -> Password reset
         """
         if self.debug:
             print("Attempting to send a password reset email to: ", email)
@@ -154,23 +185,36 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
                    on_error=self.sign_in_error)
 
     def successful_reset(self, urlrequest, reset_data):
+        """Notifies the user that a password reset email has been sent to them.
+        """
         if self.debug:
             print("Successfully sent a password reset email", reset_data)
         self.sign_in_msg = "Reset password instructions sent to your email."
 
     def save_refresh_token(self, refresh_token):
+        """Saves the refresh token in a local file to enable automatic sign in
+        next time the app is opened.
+        """
         if self.debug:
             print("Saving the refresh token to file: ", self.refresh_token_file)
         with open(self.refresh_token_file, "w") as f:
             f.write(refresh_token)
 
     def load_refresh_token(self):
+        """Reads the refresh token from local storage.
+        """
         if self.debug:
             print("Loading refresh token from file: ", self.refresh_token_file)
         with open(self.refresh_token_file, "r") as f:
             self.refresh_token = f.read()
 
     def load_saved_account(self):
+        """Uses the refresh token to get the user's idToken and localId by
+        sending it as a request to Google/Firebase's REST API.
+
+        Called immediately when a web_api_key is set and if the refresh token
+        file exists.
+        """
         if self.debug:
             print("Attempting to log in a user automatically using a refresh token.")
         self.load_refresh_token()
@@ -182,6 +226,9 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
                    on_error=self.failed_account_load)
 
     def successful_account_load(self, urlrequest, loaded_data):
+        """Sets the idToken and localId variables upon successfully loading an
+        account using the refresh token.
+        """
         if self.debug:
             print("Successfully logged a user in automatically using the refresh token")
         self.idToken = loaded_data['id_token']
