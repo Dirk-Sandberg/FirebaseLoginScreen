@@ -2,7 +2,7 @@
     FloatLayout:
         ThemedButton:
             size_hint: .4, .05
-            pos_hint: {"center_x": .75, "top": .375}
+            pos_hint: {"center_x": .25, "top": .225}
             text: "[u]Back[/u]"
             bg_color: root.parent.parent.primary_color if root.parent else (0,0,0,1)
             color: root.parent.parent.secondary_color if root.parent else (0,0,0,1)
@@ -14,7 +14,7 @@
         ThemedInput:
             id: email
             size_hint: .9 ,.1
-            pos_hint: {"center_x": .5, "top": .725}
+            pos_hint: {"center_x": .5, "top": .7}
             hint_text: "Email"
             bg_color: root.parent.parent.primary_color if root.parent else (0,0,0,1)
             highlight_color1: root.parent.parent.secondary_color if root.parent else (0,0,0,1)
