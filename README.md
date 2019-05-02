@@ -36,20 +36,19 @@ example below.
 `main.py`
 
     from kivy.app import App
-    from kivy import utils
         
     class MainApp(App):
-        login_primary_color = utils.get_color_from_hex("#ABCDEF") # Login widget background colors
-        login_secondary_color = (0, 1, 0, 1) # Login widget text color
-        login_tertiary_color = (0, 0, 1, 1)  # Color of loading icon and text when in editing
-    
+        pass
     MainApp().run()
 
 
 <h5><b>Update main.kv</b></h5>
 
-In the kv file where you want to use the login screen, include this statement:
-<br>`#:include FirebaseLoginScreen/firebaseloginscreen.kv`
+In the kv file where you want to use the login screen, include these statements:
+<br>
+
+    #:include FirebaseLoginScreen/firebaseloginscreen.kv`
+    #:import FirebaseLoginScreen FirebaseLoginScreen.firebaseloginscreen.FirebaseLoginScreen
 
 You also need to set the <b>web api key</b> of your Firebase project. This
 can be found in your Firebase project by clicking on the settings wheel in the
@@ -74,11 +73,16 @@ shown in the example below:
     
     #:include FirebaseLoginScreen/firebaseloginscreen.kv
     #:import FirebaseLoginScreen FirebaseLoginScreen.firebaseloginscreen.FirebaseLoginScreen
+    #:import utils kivy.utils
     
     ScreenManager:
         FirebaseLoginScreen:
             id: firebase_login_screen
+            name: "firebase_login_screen"
             web_api_key: "your_web_api_key_from_firebase" # Found in Firebase -> Project Settings -> Web API Key
+            primary_color: utils.get_color_from_hex("#EE682A")
+            secondary_color: utils.get_color_from_hex("#060809")
+            tertiary_color: (.25, .25, .25, 1)
             on_login_success:
                 # Defining this function lets you program what to do when the
                 # user has logged in (probably you'll want to change screens)!
