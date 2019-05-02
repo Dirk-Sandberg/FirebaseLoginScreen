@@ -36,9 +36,10 @@ example below.
 `main.py`
 
     from kivy.app import App
+    from kivy import utils
         
     class MainApp(App):
-        login_primary_color = (1, 0, 0, 1)   # Login widget background colors
+        login_primary_color = utils.get_color_from_hex("#ABCDEF") # Login widget background colors
         login_secondary_color = (0, 1, 0, 1) # Login widget text color
         login_tertiary_color = (0, 0, 1, 1)  # Color of loading icon and text when in editing
     
@@ -89,14 +90,13 @@ Make sure the FirebaseLoginScreen is the first screen in your `ScreenManager`.
 
 That's it! Run your app and enjoy your login screen.
 
-<h5><b>--------- NOTE: ENABLE EMAIL AUTHENTICATION ---------</b></h5>
--
+##### --------- NOTE: ENABLE EMAIL AUTHENTICATION ---------
 Your Firebase project must be allowed to register users through an email and
 password. You can set this up easily by going to the Authentication portion of your
 Firebase project.
 
-<h5><b>--------- NOTE: CUSTOMIZE RESET PASSWORD EMAIL ---------</b></h5>
--
+##### --------- NOTE: CUSTOMIZE RESET PASSWORD EMAIL ---------
+
 You can customize the email that is sent to users when they want to reset their email.
 Go to your Firebase project, then go to <b>Authentication</b>, then click on <b>Templates</b>,
 then click on <b>Password reset</b>
