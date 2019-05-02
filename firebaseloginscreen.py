@@ -29,12 +29,19 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
     in the KV language like so:
     FirebaseLoginScreen:
         web_api_key: "your_firebase_web_api_key"
-        primary_color: (1, 0, 0, 1)
-        secondary_color: (0, 1, 0, 1)
-        tertiary_color: (0, 0, 1, 1)
         debug: True # Not necessary, but will print out debug information
         on_login_success:
             # do something here
+
+    In your main App class, set the three following fields to dictate the color
+    scheme of the login screens. Example:
+
+    class MainApp(App):
+        primary_color: (1, 0, 0, 1)
+        secondary_color: (0, 1, 0, 1)
+        tertiary_color: (0, 0, 1, 1)
+        pass
+
     NOTES:
     1) You MUST set the web api key or it is impossible for the login screen to
     function properly.
@@ -45,12 +52,6 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
     4) You can set the colors (primary_color, secondary_color, tertiary_color)
     to be whatever you like.
     """
-    # Configurable UI attributes
-    primary_color = (0, 1, 1)
-    secondary_color = (0, .2, 1)
-    tertiary_color = (1, 0, 0)
-    login_success = BooleanProperty(False)
-    debug = False
 
     # Firebase Project meta info - MUST BE CONFIGURED BY DEVELOPER
     web_api_key = StringProperty()  # From Settings tab in Firebase project
@@ -60,11 +61,14 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
     localId = ""
     idToken = ""
 
-    # Private properties used to update parts of the login screen
+    # Properties used to send events to update some parts of the UI
+    login_success = BooleanProperty(False)  # Called upon successful sign in
     sign_up_msg = StringProperty()
     sign_in_msg = StringProperty()
     email_exists = BooleanProperty(False)
     email_not_found = BooleanProperty(False)
+
+    debug = False
 
     def on_login_success(self, *args):
         """Overwrite this method to switch to your app's home screen.
