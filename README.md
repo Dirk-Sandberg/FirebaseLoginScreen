@@ -36,9 +36,7 @@ example below.
 `main.py`
 
     from kivy.app import App
-    
-    from FirebaseLoginScreen.firebaseloginscreen import FirebaseLoginScreen
-    
+        
     class MainApp(App):
         login_primary_color = (1, 0, 0, 1)   # Login widget background colors
         login_secondary_color = (0, 1, 0, 1) # Login widget text color
@@ -73,7 +71,8 @@ shown in the example below:
 
 `main.kv`
     
-    #:include FirebaseLoginScreen/firebaseloginscreen.kv
+    #:include firebaseloginscreen.kv
+    #:import FirebaseLoginScreen firebaseloginscreen.FirebaseLoginScreen
 
     ScreenManager:
         FirebaseLoginScreen:

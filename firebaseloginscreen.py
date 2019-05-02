@@ -72,6 +72,8 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
 
     debug = False
     popup = Factory.LoadingPopup()
+    popup.background = folder + "/transparent_image.png"
+    popup.color = App.get_running_app().login_tertiary_color
 
     def on_login_success(self, *args):
         """Overwrite this method to switch to your app's home screen.
