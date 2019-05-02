@@ -117,6 +117,11 @@ Example:
                 size: self.size
                 pos: self.pos
                 source: "your/image/here.png"
+                
+                
+If your app takes a long time to start up, you may need to set the `web_api_key`
+from python instead of in the kv language. You need to set it in the `on_start`
+method of your `App` class. Haven't fully characterized this race condition yet. 
 
 
 
