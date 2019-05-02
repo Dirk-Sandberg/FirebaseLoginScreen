@@ -5,7 +5,9 @@
             pos_hint: {"top": 1-self.size_hint_y, "right": 2*self.size_hint_x}
             text: "X"
             on_release:
+                root.parent.transition = SlideTransition(direction="right")
                 root.parent.current = root.parent.current = "welcome_screen"
+                root.parent.transition = SlideTransition(direction="left")
 
         ThemedInput:
             id: email
@@ -34,7 +36,7 @@
 
 
         ThemedButton:
-            text: "[u]Log In[/u]"
+            text: "[u]Sign In[/u]"
             size_hint: .4 ,.1
             pos_hint: {"center_x": .75, "top": .55}
             on_release:
