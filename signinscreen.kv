@@ -14,7 +14,7 @@
         ThemedInput:
             id: email
             size_hint: .9 ,.1
-            pos_hint: {"center_x": .5, "top": .85}
+            pos_hint: {"center_x": .5, "top": .8}
             hint_text: "Email"
             bg_color: root.parent.parent.primary_color if root.parent else (0,0,0,1)
             highlight_color1: root.parent.parent.secondary_color if root.parent else (0,0,0,1)
@@ -23,7 +23,7 @@
         ThemedInput:
             id: password
             size_hint: .9 ,.1
-            pos_hint: {"center_x": .5, "top": .7}
+            pos_hint: {"center_x": .5, "top": .65}
             hint_text: "Password"
             password: True
             bg_color: root.parent.parent.primary_color if root.parent else (0,0,0,1)
@@ -33,7 +33,7 @@
         ThemedButton:
             text: "[u]Reset Password[/u]"
             size_hint: .4 ,.1
-            pos_hint: {"center_x": .25, "top": .55}
+            pos_hint: {"center_x": .25, "top": .5}
             bg_color: root.parent.parent.primary_color if root.parent else (0,0,0,1)
             color: root.parent.parent.secondary_color if root.parent else (0,0,0,1)
             on_release:
@@ -48,7 +48,7 @@
         ThemedButton:
             text: "[u]Sign In[/u]"
             size_hint: .4 ,.1
-            pos_hint: {"center_x": .75, "top": .55}
+            pos_hint: {"center_x": .75, "top": .5}
             bg_color: root.parent.parent.primary_color if root.parent else (0,0,0,1)
             color: root.parent.parent.secondary_color if root.parent else (0,0,0,1)
             on_release:
