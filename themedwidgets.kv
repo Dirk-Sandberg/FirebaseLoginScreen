@@ -7,19 +7,23 @@
 
     canvas.before:
         Color:
-            rgb: self.bg_color if self.bg_color else (0,0,0)
+            rgba: self.bg_color if self.bg_color else (0,0,0,1)
         RoundedRectangle:
             size: self.size
             pos: self.pos
             radius: 10,
 
 <ThemedMessage@Label>:
-    bg_color: app.login_primary_color
+    bg_color: app.login_primary_color[:3] + [.7]
     color: app.login_secondary_color
+    text_size: self.size
+    padding: 15, 0
+    halign: "left"
+    valign: "center"
 
     canvas.before:
         Color:
-            rgb: self.bg_color if self.bg_color else (0,0,0)
+            rgba: self.bg_color if self.bg_color else (0,0,0,1)
         RoundedRectangle:
             size: self.size
             pos: self.pos
@@ -29,13 +33,14 @@
 <ThemedInput@FloatLayout>:
     text: ""
     hint_text: ""
+    password: False
     bg_color: app.login_primary_color
     highlight_color1: app.login_secondary_color
     highlight_color2: app.login_tertiary_color
 
     canvas.before:
         Color:
-            rgb: self.bg_color if self.bg_color else (0,0,0)
+            rgba: self.bg_color if self.bg_color else (0,0,0,1)
         Rectangle:
             size: self.size
             pos: self.pos
@@ -43,6 +48,7 @@
     TextInput:
         text: root.text
         id: the_text_input
+        password: root.password
         background_color: root.bg_color
         background_image: ""
         background_normal: ""
@@ -54,19 +60,19 @@
 
         canvas.before:
             Color:
-                rgb: self.bottom_color if self.bottom_color else (0,0,0)
+                rgba: self.bottom_color if self.bottom_color else (0,0,0,1)
             Rectangle:
                 size: (self.size[0], self.size[1]/15.)
                 pos: self.pos
 
         on_focus:
             self.bottom_color = root.highlight_color2 if self.focused else root.highlight_color1
-            #animate(the_label, animated_center_y = .8 if (self.focused or root.text != "") else .5)
             Animation(animated_center_y=(0.8 if (self.focused or root.text != "") else 0.5)).start(the_label)
         on_text:
             root.text = self.text
     Label:
         id: the_label
+        color: root.highlight_color1
         text: "  " + root.hint_text
         size_hint: None, None
         size: self.texture_size

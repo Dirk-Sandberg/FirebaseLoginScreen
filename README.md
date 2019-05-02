@@ -40,7 +40,7 @@ example below.
     class MainApp(App):
         login_primary_color = (1, 0, 0, 1)   # Login widget background colors
         login_secondary_color = (0, 1, 0, 1) # Login widget text color
-        login_tertiary_color = (0, 0, 1, 1)  # Text color when editing text fields
+        login_tertiary_color = (0, 0, 1, 1)  # Color of loading icon and text when in editing
     
     MainApp().run()
 
@@ -71,14 +71,14 @@ shown in the example below:
 
 `main.kv`
     
-    #:include firebaseloginscreen.kv
-    #:import FirebaseLoginScreen firebaseloginscreen.FirebaseLoginScreen
-
+    #:include FirebaseLoginScreen/firebaseloginscreen.kv
+    #:import FirebaseLoginScreen FirebaseLoginScreen.firebaseloginscreen.FirebaseLoginScreen
+    
     ScreenManager:
         FirebaseLoginScreen:
             id: firebase_login_screen
             web_api_key: "your_web_api_key_from_firebase" # Found in Firebase -> Project Settings -> Web API Key
-            on_login_success: 
+            on_login_success:
                 # Defining this function lets you program what to do when the
                 # user has logged in (probably you'll want to change screens)!
                 # Get the important user info
