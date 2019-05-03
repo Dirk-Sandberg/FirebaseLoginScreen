@@ -17,9 +17,10 @@ automatically sign them in the next time around. In this case, the login screens
 will not be shown, and your app will immediately do whatever you have coded it
 to do in the `on_login_success` function of the `FirebaseLoginScreen`.
 
-<h3><b>--------- USAGE ---------</b></h3>
+Usage
+-
 
-<h5><b>Clone the project</b></h5>
+<b>Clone the project</b>
 
 `cd` to your project's directory. Clone this repository using <br>
 `git clone https://github.com/Dirk-Sandberg/FirebaseLoginScreen.git`
