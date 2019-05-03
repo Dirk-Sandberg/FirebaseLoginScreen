@@ -25,29 +25,12 @@ to do in the `on_login_success` function of the `FirebaseLoginScreen`.
 
 Which will create a folder named FirebaseLoginScreen in your project.
 
-<h5><b>Update main.py</b></h5>
-
-In your <b>main.py</b> file, include the following import statement:<br>
-`from FirebaseLoginScreen.firebaseloginscreen import FirebaseLoginScreen`
-
-in your main `App` class, you must include three variables defining the color 
-scheme of the login screen. The variables are shown in the (fully functioning)
-example below.
-`main.py`
-
-    from kivy.app import App
-        
-    class MainApp(App):
-        pass
-    MainApp().run()
-
-
 <h5><b>Update main.kv</b></h5>
 
 In the kv file where you want to use the login screen, include these statements:
 <br>
 
-    #:include FirebaseLoginScreen/firebaseloginscreen.kv`
+    #:include FirebaseLoginScreen/firebaseloginscreen.kv
     #:import FirebaseLoginScreen FirebaseLoginScreen.firebaseloginscreen.FirebaseLoginScreen
 
 You also need to set the <b>web api key</b> of your Firebase project. This
