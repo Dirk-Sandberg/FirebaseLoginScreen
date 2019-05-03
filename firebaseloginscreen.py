@@ -257,7 +257,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
             print("Failed to load an account.", args)
 
     def display_loading_screen(self, *args):
-        self.popup.color = self.secondary_color
+        self.popup.color = self.tertiary_color
         self.popup.open()
 
     def hide_loading_screen(self, *args):
