@@ -94,6 +94,7 @@ This module makes use of the Progress Spinner widget from the
 kivy.garden.progressspinner</a> package. 
 
 Suggestions
+-
 
 Add a background image to your login screen to make it much less plain. Do it by
 adding an image to the canvas of your `FirebaseLoginScreen` in the kv language.
