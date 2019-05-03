@@ -5,7 +5,7 @@ user authentication.
 This package lets you essentially drop a functional login screen into your app
 within seconds.
 
-#####Features:
+<h1>Features:</h1>
 - Create account
 - Sign in to account
 - Reset password
@@ -17,7 +17,7 @@ will not be shown, and your app will immediately do whatever you have coded it
 to do in the `on_login_success` function of the `FirebaseLoginScreen`.
 
 <h3><b>--------- USAGE ---------</b></h3>
--
+
 <h5><b>Clone the project</b></h5>
 
 `cd` to your project's directory. Clone this repository using <br>
@@ -110,7 +110,7 @@ This module makes use of the Progress Spinner widget from the
 kivy.garden.progressspinner</a> package. 
 
 Suggestions
--
+
 Add a background image to your login screen to make it much less plain. Do it by
 adding an image to the canvas of your `FirebaseLoginScreen` in the kv language.
 Example:
