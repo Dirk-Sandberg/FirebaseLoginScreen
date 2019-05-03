@@ -6,6 +6,7 @@ This package lets you essentially drop a functional login screen into your app
 within seconds.
 
 <h1>Features:</h1>
+-
 - Create account
 - Sign in to account
 - Reset password
