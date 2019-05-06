@@ -6,6 +6,8 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.factory import Factory
 # Python imports
+import sys
+sys.path.append("/".join(x for x in __file__.split("/")[:-1]))
 from json import dumps
 import os.path
 import progressspinner
