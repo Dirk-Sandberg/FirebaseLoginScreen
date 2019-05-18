@@ -87,7 +87,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         memory.
         """
         # Try to load the users info if they've already created an account
-        self.refresh_token_file = App.get_running_app().user_data_dir + "refresh_token.txt"
+        self.refresh_token_file = App.get_running_app().user_data_dir + "/refresh_token.txt"
         if self.debug:
             print("Looking for a refresh token in:", self.refresh_token_file)
         if os.path.exists(self.refresh_token_file):
