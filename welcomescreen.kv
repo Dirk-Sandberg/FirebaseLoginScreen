@@ -1,6 +1,6 @@
 <WelcomeScreen>:
     FloatLayout:
-        ThemedButton:
+        MDTextButton:
             id: log_in_button
             size_hint: .9, .05
             pos_hint: {"top": .3, "center_x": .5}
@@ -10,7 +10,7 @@
             on_release:
                 root.parent.current = "sign_in_screen"
 
-        ThemedButton:
+        ThemedRaisedButton:
             id: create_account_button
             size_hint: .9, .05
             pos_hint: {"top": .225, "center_x": .5}

@@ -1,5 +1,8 @@
 #:import Animation kivy.animation.Animation
 #:import SlideTransition kivy.uix.screenmanager.SlideTransition
+#:import MDRaisedButton button.MDRaisedButton
+#:import MDTextButton button.MDTextButton
+#:import toast toast.toast
 
 <FirebaseLoginScreen>:
     primary_color: 1, 0, 0, 1
@@ -7,7 +10,7 @@
     tertiary_color: 1, 0, 0, 1
 
     on_sign_up_msg:
-        create_account_screen.ids.message.text = self.sign_up_msg
+        toast(self.sign_up_msg)
     on_email_exists:
         create_account_screen.ids.sign_in_button.disabled = False
         create_account_screen.ids.sign_in_button.opacity = 1
@@ -16,7 +19,7 @@
         sign_in_screen.ids.sign_in_button.disabled = False
         sign_in_screen.ids.sign_in_button.opacity = 1
     on_sign_in_msg:
-        sign_in_screen.ids.message.text = self.sign_in_msg
+        toast(self.sign_in_msg)
 
     ScreenManager:
         id: screen_manager

@@ -1,81 +1,11 @@
-<ThemedButton@ButtonBehavior+Label>:
-    markup: True
-    opacity: 1 if self.state == 'normal' else .8
+<ThemedInput@MDTextField>:
+    color_mode: 'custom'
 
-    bg_color: (0,0,0,1)
-    #color: app.login_secondary_color
+<ThemedTextButton@MDTextButton>:
+    background_down: 'transparent.png'.format(images_path)
+    background_normal: 'transparent.png'.format(images_path)
 
-    canvas.before:
-        Color:
-            rgba: self.bg_color
-        RoundedRectangle:
-            size: self.size
-            pos: self.pos
-            radius: 10,
-
-<ThemedMessage@Label>:
-    bg_color: (0,0,0,1) #app.login_primary_color[:3] + [.7] if type(app.login_primary_color) != tuple else app.login_primary_color[:3] + tuple([.7])
-    #color: app.login_secondary_color
-    text_size: self.size
-    padding: 15, 0
-    halign: "left"
-    valign: "center"
-
-    canvas.before:
-        Color:
-            rgba: self.bg_color if self.bg_color else (0,0,0,1)
-        RoundedRectangle:
-            size: self.size
-            pos: self.pos
-            radius: 0,
-
-
-<ThemedInput@FloatLayout>:
-    text: ""
-    hint_text: ""
-    password: False
-    bg_color: (0,0,0,1)#app.login_primary_color
-    highlight_color1: (1,0,0,1)#app.login_secondary_color
-    highlight_color2: (0,0,1,1)#app.login_tertiary_color
-
-    canvas.before:
-        Color:
-            rgba: self.bg_color if self.bg_color else (0,0,0,1)
-        Rectangle:
-            size: self.size
-            pos: self.pos
-
-    TextInput:
-        text: root.text
-        id: the_text_input
-        password: root.password
-        background_color: root.bg_color
-        background_image: ""
-        background_normal: ""
-        background_active: ""
-        multiline: False
-        bottom_color: root.highlight_color1
-        size_hint: 1, .7
-        pos_hint: {"top": .7, "right": 1}
-
-        canvas.before:
-            Color:
-                rgba: self.bottom_color if self.bottom_color else (0,0,0,1)
-            Rectangle:
-                size: (self.size[0], self.size[1]/15.)
-                pos: self.pos
-
-        on_focus:
-            self.bottom_color = root.highlight_color2 if self.focused else root.highlight_color1
-            Animation(animated_center_y=(0.8 if (self.focused or root.text != "") else 0.5)).start(the_label)
-        on_text:
-            root.text = self.text
-    Label:
-        id: the_label
-        color: root.highlight_color1
-        text: "  " + root.hint_text
-        size_hint: None, None
-        size: self.texture_size
-        animated_center_y: .5
-        animated_x: .95
-        pos_hint: {"center_y": self.animated_center_y, "right": self.animated_x}
+<ThemedRaisedButton@MDRaisedButton>:
+    md_bg_color: (0,0,0,1)#root.theme_cls.primary_color
+    theme_text_color: 'Custom'
+    text_color: (0,0,0,1)#root.specific_text_color

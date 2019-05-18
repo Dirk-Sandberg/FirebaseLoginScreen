@@ -1,6 +1,7 @@
+#:import MDTextField textfields.MDTextField
 <CreateAccountScreen>:
     FloatLayout:
-        ThemedButton:
+        ThemedRaisedButton:
             size_hint: .4, .05
             pos_hint: {"center_x": .25, "top": .225}
             text: "[u]Back[/u]"
@@ -16,9 +17,8 @@
             size_hint: .9 ,.1
             pos_hint: {"center_x": .5, "top": .7}
             hint_text: "Email"
-            bg_color: root.parent.parent.primary_color if root.parent else (0,0,0,1)
-            highlight_color1: root.parent.parent.secondary_color if root.parent else (0,0,0,1)
-            highlight_color2: root.parent.parent.tertiary_color if root.parent else (0,0,0,1)
+            line_color_focus: root.parent.parent.primary_color if root.parent else (0,0,0,1)
+            line_color_normal: root.parent.parent.primary_color if root.parent else (0,0,0,1)
 
 
         ThemedInput:
@@ -27,11 +27,10 @@
             pos_hint: {"center_x": .5, "top": .575}
             hint_text: "Password"
             password: True
-            bg_color: root.parent.parent.primary_color if root.parent else (0,0,0,1)
-            highlight_color1: root.parent.parent.secondary_color if root.parent else (0,0,0,1)
-            highlight_color2: root.parent.parent.tertiary_color if root.parent else (0,0,0,1)
+            line_color_focus: root.parent.parent.primary_color if root.parent else (0,0,0,1)
+            line_color_normal: root.parent.parent.primary_color if root.parent else (0,0,0,1)
 
-        ThemedButton:
+        ThemedRaisedButton:
             text: "[u]Create Account[/u]"
             size_hint: .4 ,.05
             pos_hint: {"center_x": .75, "top": .45}
@@ -40,22 +39,11 @@
             on_release:
                 # Need to refer to the FirebaseLoginScreen
                 root.parent.parent.sign_up(email.text, password.text)
-                Animation(opacity=0, duration=0.5).start(message)
                 sign_in_button.opacity = 0
                 sign_in_button.disabled = True
                 root.parent.parent.display_loading_screen()
 
-        ThemedMessage:
-            id: message
-            size_hint: .9 ,.1
-            pos_hint: {"center_x": .5, "center_y": .1}
-            opacity: 0
-            bg_color: (root.parent.parent.primary_color[:3] + [.7] if (type(root.parent.parent.primary_color) != tuple) else root.parent.parent.primary_color[:3] + tuple([.7])) if root.parent else (0,0,0,1)
-            color: root.parent.parent.secondary_color if root.parent else (0,0,0,1)
-            on_text:
-                Animation(opacity=1, duration=0.5).start(self)
-
-        ThemedButton:
+        ThemedRaisedButton:
             id: sign_in_button
             text: "[u]Sign in[/u]"
             size_hint: .2 ,.05
