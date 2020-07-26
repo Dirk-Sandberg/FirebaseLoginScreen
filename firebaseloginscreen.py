@@ -5,6 +5,7 @@ from kivy.network.urlrequest import UrlRequest
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.factory import Factory
+import certifi
 # Python imports
 import sys
 sys.path.append("/".join(x for x in __file__.split("/")[:-1]))
@@ -107,7 +108,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         UrlRequest(signup_url, req_body=signup_payload,
                    on_success=self.successful_login,
                    on_failure=self.sign_up_failure,
-                   on_error=self.sign_up_error)
+                   on_error=self.sign_up_error, ca_file=certifi.where())
 
     def successful_login(self, urlrequest, log_in_data):
         """Collects info from Firebase upon successfully registering a new user.
@@ -159,7 +160,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         UrlRequest(sign_in_url, req_body=sign_in_payload,
                    on_success=self.successful_login,
                    on_failure=self.sign_in_failure,
-                   on_error=self.sign_in_error)
+                   on_error=self.sign_in_error, ca_file=certifi.where())
 
     def sign_in_failure(self, urlrequest, failure_data):
         """Displays an error message to the user if their attempt to create an
@@ -200,7 +201,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         UrlRequest(reset_pw_url, req_body=reset_pw_data,
                    on_success=self.successful_reset,
                    on_failure=self.sign_in_failure,
-                   on_error=self.sign_in_error)
+                   on_error=self.sign_in_error, ca_file=certifi.where())
 
     def successful_reset(self, urlrequest, reset_data):
         """Notifies the user that a password reset email has been sent to them.
@@ -242,7 +243,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         UrlRequest(refresh_url, req_body=refresh_payload,
                    on_success=self.successful_account_load,
                    on_failure=self.failed_account_load,
-                   on_error=self.failed_account_load)
+                   on_error=self.failed_account_load, ca_file=certifi.where())
 
     def successful_account_load(self, urlrequest, loaded_data):
         """Sets the idToken and localId variables upon successfully loading an
