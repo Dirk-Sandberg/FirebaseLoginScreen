@@ -11,7 +11,6 @@ import sys
 sys.path.append("/".join(x for x in __file__.split("/")[:-1]))
 from json import dumps
 import os.path
-import progressspinner
 
 # Load the kv files
 folder = os.path.dirname(os.path.realpath(__file__))
