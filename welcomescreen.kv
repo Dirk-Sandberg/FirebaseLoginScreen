@@ -1,20 +1,20 @@
 <WelcomeScreen>:
     FloatLayout:
-        ThemedButton:
+        MDRaisedButton:
             id: log_in_button
             size_hint: .9, .05
             pos_hint: {"top": .3, "center_x": .5}
-            text: "[u]Sign In[/u]"
+            text: "Sign In"
             bg_color: root.parent.parent.primary_color if root.parent else (0,0,0,1)
             color: root.parent.parent.secondary_color if root.parent else (0,0,0,1)
             on_release:
                 root.parent.current = "sign_in_screen"
 
-        ThemedButton:
+        MDRaisedButton:
             id: create_account_button
             size_hint: .9, .05
             pos_hint: {"top": .225, "center_x": .5}
-            text: "[u]Create Account[/u]"
+            text: "Create Account"
             bg_color: root.parent.parent.primary_color if root.parent else (0,0,0,1)
             color: root.parent.parent.secondary_color if root.parent else (0,0,0,1)
             on_release:

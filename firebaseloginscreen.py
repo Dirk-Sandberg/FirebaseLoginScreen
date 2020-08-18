@@ -6,6 +6,10 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.factory import Factory
 import certifi
+
+# KivyMD imports
+from kivymd.toast import toast
+
 # Python imports
 import sys
 sys.path.append("/".join(x for x in __file__.split("/")[:-1]))
@@ -14,7 +18,6 @@ import os.path
 
 # Load the kv files
 folder = os.path.dirname(os.path.realpath(__file__))
-Builder.load_file(folder + "/themedwidgets.kv")
 Builder.load_file(folder + "/signinscreen.kv")
 Builder.load_file(folder + "/createaccountscreen.kv")
 Builder.load_file(folder + "/welcomescreen.kv")
@@ -127,13 +130,8 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         """
         self.hide_loading_screen()
         self.email_exists = False  # Triggers hiding the sign in button
-        print(failure_data)
         msg = failure_data['error']['message'].replace("_", " ").capitalize()
-        # Check if the error msg is the same as the last one
-        if msg == self.sign_up_msg:
-            # Need to modify it somehow to make the error popup display
-            msg = " " + msg + " "
-        self.sign_up_msg = msg
+        toast(msg)
         if msg == "Email exists":
             self.email_exists = True
         if self.debug:
@@ -169,11 +167,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         self.email_not_found = False  # Triggers hiding the sign in button
         print(failure_data)
         msg = failure_data['error']['message'].replace("_", " ").capitalize()
-        # Check if the error msg is the same as the last one
-        if msg == self.sign_in_msg:
-            # Need to modify it somehow to make the error popup display
-            msg = " " + msg + " "
-        self.sign_in_msg = msg
+        toast(msg)
         if msg == "Email not found":
             self.email_not_found = True
         if self.debug:
