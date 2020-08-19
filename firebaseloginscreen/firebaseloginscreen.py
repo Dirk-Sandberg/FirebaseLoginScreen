@@ -66,6 +66,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
     sign_in_msg = StringProperty()
     email_exists = BooleanProperty(False)
     email_not_found = BooleanProperty(False)
+    remember_user = BooleanProperty(True)
 
     debug = False
     popup = Factory.LoadingPopup()
@@ -85,8 +86,9 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         self.refresh_token_file = App.get_running_app().user_data_dir + "/refresh_token.txt"
         if self.debug:
             print("Looking for a refresh token in:", self.refresh_token_file)
-        if os.path.exists(self.refresh_token_file):
-            self.load_saved_account()
+        if self.remember_user:
+            if os.path.exists(self.refresh_token_file):
+                self.load_saved_account()
 
     def sign_up(self, email, password):
         """If you don't want to use Firebase, just overwrite this method and

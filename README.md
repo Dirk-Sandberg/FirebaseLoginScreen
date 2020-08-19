@@ -112,7 +112,6 @@ method of your `App` class. Haven't fully characterized this race condition yet.
 
 # Future Features
 Log out function
-Boolean auto sign in
 Boolean Email verification (for email sign ins)
 Boolean SMS Verification (for phone sign ins) 
 Sign in method choice

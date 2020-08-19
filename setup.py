@@ -1,6 +1,6 @@
 import pathlib
 from setuptools import setup, find_packages
-VERSION = '1.0.0'
+VERSION = '1.0.2'
 # The directory containing this file
 HERE = pathlib.Path(__file__).parent
 
@@ -23,7 +23,7 @@ setup(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
     ],
-    packages=find_packages(exclude=["kivymd.tools.release"]),
+    packages=find_packages(),
     include_package_data=True,
     install_requires=["kivymd==0.104.1"],
     entry_points={
