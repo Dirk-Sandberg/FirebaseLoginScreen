@@ -22,6 +22,7 @@ Builder.load_file(folder + "/signinscreen.kv")
 Builder.load_file(folder + "/createaccountscreen.kv")
 Builder.load_file(folder + "/welcomescreen.kv")
 Builder.load_file(folder + "/loadingpopup.kv")
+Builder.load_file(folder + "/firebaseloginscreen.kv")
 
 # Import the screens used to log the user in
 from welcomescreen import WelcomeScreen
@@ -34,25 +35,16 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
     """Use this widget as a complete module to incorporate Firebase user
     authentication in your app. To use this module, instantiate the login screen
     in the KV language like so:
-    FirebaseLoginScreen:
+    firebaseloginscreen:
         web_api_key: "your_firebase_web_api_key"
         debug: True # Not necessary, but will print out debug information
         on_login_success:
             # do something here
 
-    In your main App class, set the three following fields to dictate the color
-    scheme of the login screens. Example:
-
-    class MainApp(App):
-        primary_color: (1, 0, 0, 1)
-        secondary_color: (0, 1, 0, 1)
-        tertiary_color: (0, 0, 1, 1)
-        pass
-
     NOTES:
     1) You MUST set the web api key or it is impossible for the login screen to
     function properly.
-    2) You probably want to wrap the FirebaseLoginScreen in a ScreenManager.
+    2) You probably want to wrap the firebaseloginscreen in a ScreenManager.
     3) You probably want to switch screens to a Screen in your project once the
     user has logged in (write that code in the on_login_success function shown
     in the example above).
@@ -77,7 +69,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
 
     debug = False
     popup = Factory.LoadingPopup()
-    popup.background = folder + "/transparent_image.png"
+    popup.background = folder + "/images/transparent_image.png"
 
 
     def on_login_success(self, *args):

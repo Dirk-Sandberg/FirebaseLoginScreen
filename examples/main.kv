@@ -1,0 +1,10 @@
+#:import FirebaseLoginScreen firebaseloginscreen.firebaseloginscreen.FirebaseLoginScreen
+
+FirebaseLoginScreen:
+    size_hint: 1,1
+    pos_hint: {"top": 1, "right": 1}
+    web_api_key: "AIzaSyBm1agLPGayibuyd3az620cWtbyB_2hV88"
+    debug: False
+    on_login_success:
+        print("User has logged in. Unique identifier is ", self.localId)
+

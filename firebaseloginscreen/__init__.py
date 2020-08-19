@@ -4,18 +4,18 @@ This package lets you very easily incorporate a login screen into your app.
 --------- USAGE ---------
 
 In your main.py file, include the following import statement:
-import FirebaseLoginScreen
+import firebaseloginscreen
 
 Then, in the kv file where you want to use the login screen, include this statement:
-#:include FirebaseLoginScreen/firebaseloginscreen.kv
+#:include firebaseloginscreen/firebaseloginscreen.kv
 
-Now you can instantiate the FirebaseLoginScreen class, which inherits from the
+Now you can instantiate the firebaseloginscreen class, which inherits from the
 Kivy Screen class. That means you need to add it to your ScreenManager.
 
 Example:
     `main.kv`
     ScreenManager:
-        FirebaseLoginScreen:
+        firebaseloginscreen:
             id: firebase_login_screen
             web_addr: "gweomg-wewegw"
             secret_api_key: "wkgmwanrg"
