@@ -4,8 +4,6 @@
             size_hint: .4, .05
             pos_hint: {"center_x": .25, "top": .225}
             text: "Back"
-            bg_color: root.parent.parent.primary_color if root.parent else (0,0,0,1)
-            color: root.parent.parent.secondary_color if root.parent else (0,0,0,1)
             on_release:
                 root.parent.transition = SlideTransition(direction="right")
                 root.parent.current = root.parent.current = "welcome_screen"
@@ -16,9 +14,6 @@
             size_hint_x: .9
             pos_hint: {"center_x": .5, "top": .7}
             hint_text: "Email"
-            bg_color: root.parent.parent.primary_color if root.parent else (0,0,0,1)
-            highlight_color1: root.parent.parent.secondary_color if root.parent else (0,0,0,1)
-            highlight_color2: root.parent.parent.tertiary_color if root.parent else (0,0,0,1)
 
         MDTextField:
             id: password
@@ -26,16 +21,11 @@
             pos_hint: {"center_x": .5, "top": .575}
             hint_text: "Password"
             password: True
-            bg_color: root.parent.parent.primary_color if root.parent else (0,0,0,1)
-            highlight_color1: root.parent.parent.secondary_color if root.parent else (0,0,0,1)
-            highlight_color2: root.parent.parent.tertiary_color if root.parent else (0,0,0,1)
 
         MDRaisedButton:
             text: "Reset Password"
             size_hint: .4 ,.05
             pos_hint: {"center_x": .25, "top": .45}
-            bg_color: root.parent.parent.primary_color if root.parent else (0,0,0,1)
-            color: root.parent.parent.secondary_color if root.parent else (0,0,0,1)
             on_release:
                 # Need to refer to the FirebaseLoginScreen
                 root.parent.parent.reset_password(email.text)
@@ -48,8 +38,6 @@
             text: "Sign In"
             size_hint: .4 ,.05
             pos_hint: {"center_x": .75, "top": .45}
-            bg_color: root.parent.parent.primary_color if root.parent else (0,0,0,1)
-            color: root.parent.parent.secondary_color if root.parent else (0,0,0,1)
             on_release:
                 # Need to refer to the FirebaseLoginScreen
                 root.parent.parent.sign_in(email.text, password.text)
@@ -64,8 +52,6 @@
             pos_hint: {"right": .85, "center_y": .1}
             opacity: 0
             disabled: True
-            bg_color: (0,0,0,0)# root.parent.parent.primary_color if root.parent else (0,0,0,1)
-            color: root.parent.parent.secondary_color if root.parent else (0,0,0,1)
             on_release:
                 root.parent.current = "create_account_screen"
                 root.parent.parent.ids.create_account_screen.ids.email.text = email.text

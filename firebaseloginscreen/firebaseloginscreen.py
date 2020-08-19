@@ -35,7 +35,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
     """Use this widget as a complete module to incorporate Firebase user
     authentication in your app. To use this module, instantiate the login screen
     in the KV language like so:
-    firebaseloginscreen:
+    FirebaseLoginScreen:
         web_api_key: "your_firebase_web_api_key"
         debug: True # Not necessary, but will print out debug information
         on_login_success:
@@ -48,8 +48,6 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
     3) You probably want to switch screens to a Screen in your project once the
     user has logged in (write that code in the on_login_success function shown
     in the example above).
-    4) You can set the colors (primary_color, secondary_color, tertiary_color)
-    to be whatever you like.
     """
 
     # Firebase Project meta info - MUST BE CONFIGURED BY DEVELOPER
@@ -159,7 +157,6 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         """
         self.hide_loading_screen()
         self.email_not_found = False  # Triggers hiding the sign in button
-        print(failure_data)
         msg = failure_data['error']['message'].replace("_", " ").capitalize()
         toast(msg)
         if msg == "Email not found":
@@ -248,8 +245,18 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         if self.debug:
             print("Failed to load an account.", args)
 
+    def sign_out(self):
+        self.localId = ''
+        self.idToken = ''
+        self.clear_refresh_token_file()
+        self.ids.screen_manager.current = 'welcome_screen'
+        toast("Signed out")
+
+    def clear_refresh_token_file(self):
+        with open(self.refresh_token_file, 'w') as f:
+            f.write('')
+
     def display_loading_screen(self, *args):
-        self.popup.color = self.tertiary_color
         self.popup.open()
 
     def hide_loading_screen(self, *args):
