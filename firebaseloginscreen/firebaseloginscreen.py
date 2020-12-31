@@ -121,7 +121,6 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
                    on_error=self.sign_up_error, ca_file=certifi.where())
 
     def successful_sign_up(self, request, result):
-        print("--------------------")
         if self.debug:
             print("Successfully signed up a user: ", result)
         self.hide_loading_screen()
@@ -149,8 +148,6 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         self.idToken = log_in_data['idToken']
         self.save_refresh_token(self.refresh_token)
 
-        print("If user created an account, we need to do verification")
-        print("If user is re-signing in, don't need to do verification")
         if self.require_email_verification:
             self.check_if_user_verified_email()
         else:
@@ -325,7 +322,8 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         toast("Failed to check email verification status.")
 
     def got_verification_info(self, request, result):
-        print("got_verification_info", request, result)
+        if self.debug:
+            print("got_verification_info", request, result)
         if result['users'][0]['emailVerified']:
             self.login_success = True
         else:

@@ -1,6 +1,12 @@
 #:import SlideTransition kivy.uix.screenmanager.SlideTransition
 
 <FirebaseLoginScreen>:
+    background: ""
+    canvas.before:
+        Rectangle:
+            size: self.size
+            pos: self.pos
+            source: root.background
     on_email_exists:
         create_account_screen.ids.sign_in_button.disabled = False
         create_account_screen.ids.sign_in_button.opacity = 1
