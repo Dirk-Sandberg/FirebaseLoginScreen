@@ -68,7 +68,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
 
     debug = False
     popup = Factory.LoadingPopup()
-    popup.background = folder + "/images/transparent_image.png"
+    popup.background = folder + "/transparent_image.png"
 
     def log_out(self):
         '''Clear the user's refresh token, marked them as not signed in, and

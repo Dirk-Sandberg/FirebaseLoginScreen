@@ -1,6 +1,6 @@
 import pathlib
 from setuptools import setup, find_packages
-VERSION = '1.0.2'
+VERSION = '1.0.6'
 # The directory containing this file
 HERE = pathlib.Path(__file__).parent
 
@@ -25,7 +25,7 @@ setup(
     ],
     packages=find_packages(),
     include_package_data=True,
-    install_requires=["kivymd==0.104.1"],
+    install_requires=["kivymd>=0.104.1"],
     entry_points={
         "console_scripts": [
             "realpython=reader.__main__:main",
