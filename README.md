@@ -53,18 +53,19 @@ of the code you should add to your `ScreenManager`:
 Make sure the FirebaseLoginScreen is the first screen in your `ScreenManager`.
 
 Variables you can set when you instantiate the `FirebaseLoginScreen`:
-| variable name  | required? | Description | Default |
-| ------------- | ------------- | ------------- |
-| debug  | No  | Will print a bunch of helpful output. | False |
-| remember_user  | No  | Will remember the last user to sign in and automatically sign them in when they open the app. | True |
-| require_email_verification | No | Sends new users a verification email before they can sign in. | True |
-| web_api_key| Yes | Your Firebase project's web api key. | None |
-| on_login_success | Yes | This function is fired when the user successfully logs in OR out. | None |
-| background | No | The path to an image that will be the background for the login screen. | None |
+
+| Variable Name  | Required? | Description | Default | Type |
+| ------------- | ------------- | ------------- | ------------- |------------- |
+| web_api_key| Yes | Your Firebase project's web api key. | "" | String |
+| on_login_success | Yes | This function is fired when the user successfully logs in OR out. | None | Function(s) |
+| debug  | No  | Will print a bunch of helpful output. | False | Boolean |
+| remember_user  | No  | Will remember the last user to sign in and automatically sign them in when they open the app. | True | Boolean |
+| require_email_verification | No | Sends new users a verification email before they can sign in. | True | Boolean |
+| background | No | The path to an image that will be the background for the login screen. | "" | String |
 
 Check out the examples folder in this Github repo if you want to see an example of using the FirebaseLoginScreen.
 
-Need help figuring out the setup related to Firebase? Check out these instructions.
+Need help figuring out the setup related to Firebase? Check out [these instructions](https://github.com/Dirk-Sandberg/FirebaseLoginScreen/blob/development/FIREBASE_INSTRUCTIONS.md).
 
 # Notes from the author
 You should define the `on_login_success` function to execute whatever code you
