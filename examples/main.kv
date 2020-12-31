@@ -3,9 +3,10 @@
 FirebaseLoginScreen:
     size_hint: 1,1
     pos_hint: {"top": 1, "right": 1}
-    web_api_key: "AIzaSyBm1agLPGayibuyd3az620cWtbyB_2hV88"
     debug: True
     remember_user: True
+    require_email_verification: True
+    web_api_key: "AIzaSyCVAZHLsIkT62IyXIQ0p6JMDioZ5-NPVrQ"
     on_login_success:
         print("User has logged in. Unique identifier is ", self.localId)
 

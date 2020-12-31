@@ -29,10 +29,13 @@
             pos_hint: {"center_x": .75, "top": .45}
             on_release:
                 # Need to refer to the FirebaseLoginScreen
+                root.parent.parent.log_out()
                 root.parent.parent.sign_up(email.text, password.text)
                 sign_in_button.opacity = 0
                 sign_in_button.disabled = True
                 root.parent.parent.display_loading_screen()
+                root.parent.parent.ids.sign_in_screen.ids.email.text = email.text
+                root.parent.parent.ids.sign_in_screen.ids.password.text = password.text
 
         MDRaisedButton:
             id: sign_in_button
