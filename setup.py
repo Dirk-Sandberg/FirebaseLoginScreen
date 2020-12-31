@@ -1,6 +1,6 @@
 import pathlib
 from setuptools import setup, find_packages
-VERSION = '1.0.6'
+VERSION = '1.0.7'
 # The directory containing this file
 HERE = pathlib.Path(__file__).parent
 
