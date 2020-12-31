@@ -1,13 +1,10 @@
 <SignInScreen>:
     FloatLayout:
-        MDRaisedButton:
-            size_hint: .4, .05
-            pos_hint: {"center_x": .25, "top": .225}
-            text: "Back"
-            on_release:
-                root.parent.transition = SlideTransition(direction="right")
-                root.parent.current = root.parent.current = "welcome_screen"
-                root.parent.transition = SlideTransition(direction="left")
+        MDToolbar:
+            md_bg_color: 0,0,0,0
+            elevation: 0
+            pos_hint: {"top": 1}
+            left_action_items: [['chevron-left', lambda x: root.go_back()]]
 
         MDTextField:
             id: email
