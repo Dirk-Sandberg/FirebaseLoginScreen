@@ -6,8 +6,8 @@
             pos: self.pos
             source: root.background
     on_email_exists:
-        create_account_screen.ids.sign_in_button.disabled = False
-        create_account_screen.ids.sign_in_button.opacity = 1
+        sign_up_screen.ids.sign_in_button.disabled = False
+        sign_up_screen.ids.sign_in_button.opacity = 1
 
     on_email_not_found:
         sign_in_screen.ids.sign_in_button.disabled = False
@@ -21,6 +21,6 @@
         SignInScreen:
             id: sign_in_screen
             name: "sign_in_screen"
-        CreateAccountScreen:
-            id: create_account_screen
-            name: "create_account_screen"
+        SignUpScreen:
+            id: sign_up_screen
+            name: "sign_up_screen"

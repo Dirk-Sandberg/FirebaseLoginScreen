@@ -19,7 +19,7 @@ import os.path
 # Load the kv files
 folder = os.path.dirname(os.path.realpath(__file__))
 Builder.load_file(folder + "/signinscreen.kv")
-Builder.load_file(folder + "/createaccountscreen.kv")
+Builder.load_file(folder + "/signupscreen.kv")
 Builder.load_file(folder + "/welcomescreen.kv")
 Builder.load_file(folder + "/loadingpopup.kv")
 Builder.load_file(folder + "/firebaseloginscreen.kv")
@@ -27,7 +27,7 @@ Builder.load_file(folder + "/firebaseloginscreen.kv")
 # Import the screens used to log the user in
 from welcomescreen import WelcomeScreen
 from signinscreen import SignInScreen
-from createaccountscreen import CreateAccountScreen
+from signupscreen import SignUpScreen
 
 
 
@@ -82,8 +82,8 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         # Clear text fields
         self.ids.sign_in_screen.ids.email.text = ''
         self.ids.sign_in_screen.ids.password.text = ''
-        self.ids.create_account_screen.ids.email.text = ''
-        self.ids.create_account_screen.ids.password.text = ''
+        self.ids.sign_up_screen.ids.email.text = ''
+        self.ids.sign_up_screen.ids.password.text = ''
 
 
     def on_login_success(self, screen_name, login_success_boolean):
@@ -327,7 +327,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         if result['users'][0]['emailVerified']:
             self.login_success = True
         else:
-            toast("Your email is not verified yet, please check your email.")
+            toast("Your email is not verified yet.\n Please check your email.")
 
     def send_verification_email(self, email):
         """Sends a verification email.
@@ -357,4 +357,4 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         toast("Couldn't send email verification email")
 
     def successful_verify_email_sent(self, *args):
-        toast("A verification email has been sent. Please check your email.")
+        toast("A verification email has been sent. \nPlease check your email.")

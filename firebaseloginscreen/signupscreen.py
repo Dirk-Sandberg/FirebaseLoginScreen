@@ -1,6 +1,6 @@
 from kivy.uix.screenmanager import Screen, SlideTransition
 
-class CreateAccountScreen(Screen):
+class SignUpScreen(Screen):
     def go_back(self):
         self.parent.transition = SlideTransition(direction="right")
         self.parent.current = self.parent.current = "welcome_screen"
