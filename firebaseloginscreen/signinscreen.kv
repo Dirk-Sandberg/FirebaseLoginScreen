@@ -1,0 +1,56 @@
+<SignInScreen>:
+    FloatLayout:
+        MDToolbar:
+            md_bg_color: 0,0,0,0
+            elevation: 0
+            pos_hint: {"top": 1}
+            left_action_items: [['chevron-left', lambda x: root.go_back()]]
+            specific_text_color: 0,0,0,1
+
+        MDTextField:
+            id: email
+            size_hint_x: .9
+            pos_hint: {"center_x": .5, "top": .7}
+            hint_text: "Email"
+
+        MDTextField:
+            id: password
+            size_hint_x: .9
+            pos_hint: {"center_x": .5, "top": .575}
+            hint_text: "Password"
+            password: True
+
+        MDRaisedButton:
+            text: "Reset Password"
+            size_hint: .4 ,.05
+            pos_hint: {"center_x": .25, "top": .45}
+            on_release:
+                # Need to refer to the FirebaseLoginScreen
+                root.parent.parent.reset_password(email.text)
+                sign_in_button.opacity = 0
+                sign_in_button.disabled = True
+                root.parent.parent.display_loading_screen()
+
+
+        MDRaisedButton:
+            text: "Sign In"
+            size_hint: .4 ,.05
+            pos_hint: {"center_x": .75, "top": .45}
+            on_release:
+                # Need to refer to the FirebaseLoginScreen
+                root.parent.parent.sign_in(email.text, password.text)
+                sign_in_button.opacity = 0
+                sign_in_button.disabled = True
+                root.parent.parent.display_loading_screen()
+
+        MDRaisedButton:
+            id: sign_in_button
+            text: "Sign up"
+            size_hint: .4 ,.05
+            pos_hint: {"center_x": .75, "center_y": .25}
+            opacity: 0
+            disabled: True
+            on_release:
+                root.parent.current = "sign_up_screen"
+                root.parent.parent.ids.sign_up_screen.ids.email.text = email.text
+                root.parent.parent.ids.sign_up_screen.ids.password.text = password.text
