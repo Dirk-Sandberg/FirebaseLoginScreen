@@ -60,6 +60,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
 
     # Properties used to send events to update some parts of the UI
     login_success = BooleanProperty(False)  # Called upon successful sign in
+    login_state = StringProperty("")
     sign_up_msg = StringProperty()
     email_exists = BooleanProperty(False)
     email_not_found = BooleanProperty(False)
@@ -76,6 +77,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         '''
         with open(self.refresh_token_file, 'w') as f:
             f.write('')
+        self.login_state = 'out'
         self.login_success = False
         self.refresh_token = ''
         self.ids.screen_manager.current = 'welcome_screen'
@@ -89,6 +91,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
     def on_login_success(self, screen_name, login_success_boolean):
         """Overwrite this method to switch to your app's home screen.
         """
+        print("Testing", self.login_success, self.login_state)
         print("self.login_success=", login_success_boolean)
 
     def on_web_api_key(self, *args):
@@ -134,6 +137,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
 
         else:
             self.save_refresh_token(self.refresh_token)
+            self.login_state = 'in'
             self.login_success = True
 
     def sign_in_success(self, urlrequest, log_in_data):
@@ -151,6 +155,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         if self.require_email_verification:
             self.check_if_user_verified_email()
         else:
+            self.login_state = 'in'
             self.login_success = True
 
     def sign_up_failure(self, urlrequest, failure_data):
@@ -275,6 +280,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
             print("Successfully logged a user in automatically using the refresh token")
         self.idToken = loaded_data['id_token']
         self.localId = loaded_data['user_id']
+        self.login_state = 'in'
         self.login_success = True
 
     def failed_account_load(self, *args):
@@ -317,7 +323,8 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
                    ca_file=certifi.where())
 
     def could_not_get_verification_info(self, request, result):
-        print("could_not_get_verification_info", request, result)
+        if self.debug:
+            print("could_not_get_verification_info", request, result)
         self.hide_loading_screen()
         toast("Failed to check email verification status.")
 
@@ -325,6 +332,7 @@ class FirebaseLoginScreen(Screen, EventDispatcher):
         if self.debug:
             print("got_verification_info", request, result)
         if result['users'][0]['emailVerified']:
+            self.login_state = 'in'
             self.login_success = True
         else:
             toast("Your email is not verified yet.\n Please check your email.")

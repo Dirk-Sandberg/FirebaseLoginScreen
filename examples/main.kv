@@ -1,11 +1,33 @@
 #:import FirebaseLoginScreen firebaseloginscreen.firebaseloginscreen.FirebaseLoginScreen
 
-FirebaseLoginScreen:
-    debug: True
-    remember_user: True
-    require_email_verification: True
-    web_api_key: "AIzaSyCVAZHLsIkT62IyXIQ0p6JMDioZ5-NPVrQ"
-    background: "background.jpg"
-    on_login_success:
-        print("User has logged in. Unique identifier is ", self.localId)
+ScreenManager:
+    id: screen_manager
+    FirebaseLoginScreen:
+        id: firebase_login_screen
+        name: "firebase_login_screen"
+        debug: True
+        remember_user: True
+        require_email_verification: True
+        web_api_key: "AIzaSyCVAZHLsIkT62IyXIQ0p6JMDioZ5-NPVrQ" # This should be YOUR web_api_key
+        background: "background.jpg"
+        on_login_success:
+            if self.login_state == 'in': print("User has logged in. Unique identifier is ", self.localId)
+            if self.login_state == 'out': print("User signed out")
 
+            if self.login_state == 'in': app.local_id = self.localId
+            if self.login_state == 'in': app.user_idToken = self.idToken
+            if self.login_state == 'in': app.display_user_tokens()
+            if self.login_state == 'in': screen_manager.current = 'example_screen'
+
+
+
+    Screen:
+        id: example_screen
+        name: "example_screen"
+        BoxLayout:
+            MDLabel:
+                id: the_label
+            MDRaisedButton:
+                text: "Log out"
+                on_release:
+                    app.sign_out()
