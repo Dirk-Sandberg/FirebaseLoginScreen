@@ -20,7 +20,7 @@ within seconds.
 
 ## Usage
 
-*Psst. Want to just see a full example? Check out `main.py` and `main.kv` in the [examples](https://github.com/Dirk-Sandberg/FirebaseLoginScreen/tree/development/examples) directory.*
+*Psst. Want to just see a full example? Check out `main.py` and `main.kv` in the [examples](https://github.com/Dirk-Sandberg/FirebaseLoginScreen/tree/master/examples) directory.*
 
 ### Add the FirebaseLoginScreen widget to your ScreenManager</h5>
 
@@ -64,7 +64,7 @@ Make sure the FirebaseLoginScreen is the first screen in your `ScreenManager`.
 | background | No | The path to an image that will be the background for the login screen. | "" | String |
 | debug  | No  | Will print a bunch of helpful output. | False | Boolean |
 
-Need help figuring out the setup related to Firebase? Check out [these instructions](https://github.com/Dirk-Sandberg/FirebaseLoginScreen/blob/development/FIREBASE_INSTRUCTIONS.md).
+Need help figuring out the setup related to Firebase? Check out [these instructions](https://github.com/Dirk-Sandberg/FirebaseLoginScreen/blob/master/FIREBASE_INSTRUCTIONS.md).
 
 ## Notes from the author
 
@@ -91,6 +91,6 @@ method of your `App` class. Haven't fully characterized this race condition yet.
 
 ## Future Features
 
-Boolean SMS Verification (for phone sign ins) 
-Sign in method choice
-    email, phone
+- Boolean SMS Verification (for phone sign ins) 
+- Sign in method choice
+    - email, phone
