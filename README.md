@@ -1,4 +1,5 @@
 # FirebaseLoginScreen
+[![PyPI](https://img.shields.io/pypi/dm/firebaseloginscreen.svg)](https://pypi.python.org/pypi/firebaseloginscreen)
 
 ![Unmodified example of login screen](https://user-images.githubusercontent.com/37519914/89228723-c33b8780-d5a5-11ea-813e-cfdffc462b54.png)
 
